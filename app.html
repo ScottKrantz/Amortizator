@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Scott Krantz</title>
+    <title>Mortgage Scheduler: A Coding Project by Scott Krantz</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <!-- ==== Nav Section ==== -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/SKLogo-Light.svg" class="d-inline-block align-text-top" alt="Scott Krantz Logo" width="30" height="24"> APP NAME</a>
+            <a class="navbar-brand" href="#"><img src="img/SKLogo-Light.svg" class="d-inline-block align-text-top" alt="Scott Krantz Logo" width="30" height="24"> Mortgage Scheduler</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                         <a class="nav-link" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/ScottKrantz/MortgageScheduler">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="#">About</a>
@@ -51,7 +51,32 @@
     <!-- ==== Main Section ==== -->
     <main class="flex-shrink-0">
         <div class="container">
-
+            <div class="row">
+                <div class="col-6">
+                    <form>
+                        <div class="col-4">
+                            <p>Loan Amount</p>
+                        </div>
+                        <div class="col-8">
+                            <input id="loanAmount" type="number" class="form-control" placeholder="Loan Amount" value=15000 aria-label="Loan Amount">
+                        </div>
+                        <p>Term (Months)</p>
+                        <input id="term" type="number" class="form-control" placeholder="Term (Months)" value=60 aria-label="Term (Months)">
+                        <p>Interest Rate</p>
+                        <input id="interestRate" type="number" class="form-control" placeholder="Interest Rate" value=3 aria-label="Interest Rate">
+                        <button id="btnSubmit" type="button" class="btn btn-primary">Calculate</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <h1 class="text-center">Your Monthly Payments</h1>
+                    <h6>Total Principal</h6>
+                    <h6>Total Interest</h6>
+                    <h6>Total Cost</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12"></div>
+            </div>
         </div>
     </main>
     <!-- ==== Footer Section ==== -->
@@ -67,9 +92,9 @@
                 <div class="col d-flex align-items-center justify-content-start justify-content-lg-end">
                     <div class="row">
                         <div class="col social"><a href="https://www.linkedin.com/in/scott-krantz-32b5a8143/" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
-                        <div class="col social"><a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
-                        <div class="col social"><a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
-                        <div class="col social"><a href="#" target="_blank"><i class="fab fa-youtube fa-2x"></i></a></div>
+                        <div class="col social"><a href="https://github.com/ScottKrantz" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
+                        <!--<div class="col social"><a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>-->
+                        <!--<div class="col social"><a href="#" target="_blank"><i class="fab fa-youtube fa-2x"></i></a></div>-->
                     </div>
                 </div>
             </div>
@@ -83,6 +108,9 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="js/site.js"></script>
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click",getValues);
+    </script>
 </body>
 
 </html>
