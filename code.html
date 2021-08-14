@@ -56,14 +56,78 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        
+                        function getValues() 
+                        {
+                            //Ensure the Amortization Table is hidden.
+                            document.getElementById("results").classList.add("invisible");
+                        
+                            //Get the user values from the page.
+                            let loanAmount = document.getElementById("loanAmount").value;
+                            let term = document.getElementById("term").value;
+                            let rate = document.getElementById("rate").value;
+                            
+                            //Parse for numbers.
+                            loanAmount = parseFloat(loanAmount);
+                            term = parseFloat(term);
+                            rate = parseFloat(rate);
+                        
+                            let numbers = generateNumbers(loanAmount, term, rate);
+                        
+                            displayNumbers(numbers);
+                        
+                        }
+                        
+                        //Create the Amortization Table data.
+                        function generateNumbers(loanAmount, term, rate){
+                        
+                            let numbers = [];
+                        
+                            //Calculate the amounts.
+                            let payment = (loanAmount*(rate/1200)/(1-(1+rate/1200)**(-term))).toFixed(2);
+                            let interest = loanAmount * rate/1200;
+                            let principalPayment = payment - interest;
+                            let remainingBalance = loanAmount;
+                            let interestTotal = 0;
+                        
+                            //Create the table and fill in the data.
+                            for (let index = 1; index <= term; index++) {
+                                interest = remainingBalance * rate/1200;
+                                principalPayment = payment - interest;
+                                interestTotal += interest;
+                                remainingBalance -= principalPayment;
+                        
+                                numbers += (`<tr><td>${index}</td><td>${payment}</td><td>${principalPayment.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${interestTotal.toFixed(2)}</td><td>${remainingBalance.toFixed(2)}</td></tr>`);
+                                
+                            }
+                        
+                            let returnObj = {numbers, payment, loanAmount, interestTotal};
+                        
+                            return returnObj;
+                        
+                        }
+                        
+                        //Display the Amortization Table data.
+                        function displayNumbers(returnObj){
+                        
+                            let options = { style: 'currency', currency: 'USD' };
+                        
+                            document.getElementById("results").classList.remove("invisible");
+                            document.getElementById("results").innerHTML = returnObj.numbers
+                            document.getElementById("monthlyPayment").innerHTML = new Intl.NumberFormat('en-US', options).format(returnObj.payment);
+                            document.getElementById("totalPrincipal").innerHTML = new Intl.NumberFormat('en-US', options).format(returnObj.loanAmount);
+                            document.getElementById("totalInterest").innerHTML = new Intl.NumberFormat('en-US', options).format(returnObj.interestTotal);
+                            document.getElementById("totalCost").innerHTML = new Intl.NumberFormat('en-US', options).format(returnObj.loanAmount + returnObj.interestTotal);
+                        
+                        }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+                    <p>The Code is structured in three functions.</p>
+                    <p>Mortgage Scheduler combines a for loop, arithmetic, an array, and an object.</p>
+                    <p>The program displays an amortization table showing the number of the payment, the payment amount, principal payment, interest, total interest up to that point, and the remaining balance.</p>
+                    <p>The Loan Calculator section will accept both integers and numbers with decimals.</p>
+                    <p>The default term is 60 months but this can be changed to any term needed.</p>
                 </div>
             </div>
         </div>
@@ -73,7 +137,7 @@
         <div class="container-fluid">
             <div class="row row-cols-1 row-cols-lg-3 gy-2">
                 <div class="col order-last order-lg-first text-light">
-                    <div><span class="text-muted">&copy;2021</span> Scott Krantz | sjkrantz@aol.com</div>
+                    <div><span class="text-muted">&copy;2021</span> Scott Krantz | <a class="text-white" href="mailto:sjkrantz@aol.com">sjkrantz@aol.com</a></div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-start justify-content-lg-center">
                     <img src="img/ScottKrantz-Dark.svg" alt="Scott Krantz Logo" height="24">
