@@ -25,20 +25,20 @@ function generateNumbers(loanAmount, term, rate){
     let numbers = [];
 
     //Calculate the amounts.
-    let payment = (loanAmount*(rate/1200)/(1-(1+rate/1200)**(-term))).toFixed(2);
-    let interest = loanAmount * rate/1200;
+    let payment = loanAmount * (rate / 1200)/(1 - (1 + rate / 1200)**(-term));
+    let interest = loanAmount * rate / 1200;
     let principalPayment = payment - interest;
     let remainingBalance = loanAmount;
     let interestTotal = 0;
 
     //Create the table and fill in the data.
     for (let index = 1; index <= term; index++) {
-        interest = remainingBalance * rate/1200;
+        interest = remainingBalance * rate / 1200;
         principalPayment = payment - interest;
         interestTotal += interest;
         remainingBalance -= principalPayment;
 
-        numbers += (`<tr><td>${index}</td><td>${payment}</td><td>${principalPayment.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${interestTotal.toFixed(2)}</td><td>${remainingBalance.toFixed(2)}</td></tr>`);
+        numbers += (`<tr><td>${index}</td><td>${payment.toFixed(2)}</td><td>${principalPayment.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${interestTotal.toFixed(2)}</td><td>${Math.abs(remainingBalance).toFixed(2)}</td></tr>`);
         
     }
 
