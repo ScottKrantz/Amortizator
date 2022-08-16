@@ -31,6 +31,8 @@ function generateNumbers(loanAmount, term, rate){
     let remainingBalance = loanAmount;
     let interestTotal = 0;
 
+    let options = { style: 'currency', currency: 'USD' };
+
     //Create the table and fill in the data.
     for (let index = 1; index <= term; index++) {
         interest = remainingBalance * rate / 1200;
@@ -38,7 +40,11 @@ function generateNumbers(loanAmount, term, rate){
         interestTotal += interest;
         remainingBalance -= principalPayment;
 
-        numbers += (`<tr><td>${index}</td><td>${payment.toFixed(2)}</td><td>${principalPayment.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${interestTotal.toFixed(2)}</td><td>${Math.abs(remainingBalance).toFixed(2)}</td></tr>`);
+        numbers += (`<tr><td>${index}</td><td>${Intl.NumberFormat('en-US', options).format(payment)}</td>
+            <td>${Intl.NumberFormat('en-US', options).format(principalPayment)}</td>
+            <td>${Intl.NumberFormat('en-US', options).format(interest)}</td>
+            <td>${Intl.NumberFormat('en-US', options).format(interestTotal)}</td>
+            <td>${Intl.NumberFormat('en-US', options).format(Math.abs(remainingBalance))}</td></tr>`);
         
     }
 
